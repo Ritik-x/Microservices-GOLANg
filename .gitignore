@@ -1,0 +1,18 @@
+.neon
+.env
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Go
+bin/
+*.exe
+*.test
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
