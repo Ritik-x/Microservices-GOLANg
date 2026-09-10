@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"notification-service/repositries"
+	"os"
+	"time"
 
 	"github.com/nats-io/nats.go"
 )
@@ -17,7 +19,9 @@ type UserCreatedEvent struct {
 }
 
 func ConnectNats() (*nats.Conn, error) {
-	nc, err := nats.Connect("nats://localhost:4222")
+	natsURL := os.Getenv("NATS_URL")
+
+	nc, err := nats.Connect(natsURL)
 
 	if err != nil {
 		return nil, err
@@ -67,6 +71,9 @@ func StartConsumer(nc *nats.Conn, repo *repositries.NotificationRepository) erro
 	},
 		nats.Durable("notification-service"),
 		nats.ManualAck(),
+		nats.AckWait(30*time.Second),
+		nats.MaxDeliver(5),
 	)
+
 	return err
 }

@@ -1,0 +1,105 @@
+basePath: /
+host: localhost:8080
+info:
+  contact: {}
+  description: API Gateway for User and Notification microservices.
+  title: Microservices Assignment API
+  version: "1.0"
+paths:
+  /api/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user and return a JWT token
+      parameters:
+      - description: Login credentials
+        in: body
+        name: request
+        required: true
+        schema:
+          properties:
+            email:
+              type: string
+            password:
+              type: string
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      summary: User login
+      tags:
+      - Authentication
+  /api/users:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new user account
+      parameters:
+      - description: User details
+        in: body
+        name: request
+        required: true
+        schema:
+          properties:
+            email:
+              type: string
+            name:
+              type: string
+            password:
+              type: string
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Create a new user
+      tags:
+      - Users
+  /health:
+    get:
+      description: Returns the health status of the API Gateway
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: API Gateway is running
+          schema:
+            type: string
+      summary: Check API Gateway health
+      tags:
+      - Health
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

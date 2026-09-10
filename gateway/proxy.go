@@ -4,11 +4,12 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"os"
 )
 
 func userServiceProxy() http.Handler {
-
-	target, err := url.Parse("http://localhost:8081")
+	targetURL := os.Getenv("USER_SERVICE_URL")
+	target, err := url.Parse(targetURL)
 	if err != nil {
 		panic(err)
 	}
@@ -27,11 +28,24 @@ func userServiceProxy() http.Handler {
 	return proxy
 }
 
+// Login godoc
+// @Summary User login
+// @Description Authenticate user and return a JWT token
+// @Tags Authentication
+// @Accept json
+// @Produce json
+// @Param request body object{email=string,password=string} true "Login credentials"
+// @Success 200 {object} map[string]string
+// @Failure 400 {string} string
+// @Failure 401 {string} string
+// @Router /api/auth/login [post]
+
 func authServiceProxy() http.Handler {
-	target, err := url.Parse("http://localhost:8081")
+	targetURL := os.Getenv("USER_SERVICE_URL")
+
+	target, err := url.Parse(targetURL)
 	if err != nil {
 		panic(err)
-
 	}
 	proxy := httputil.NewSingleHostReverseProxy(target)
 	proxy.Director = func(req *http.Request) {

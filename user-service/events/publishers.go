@@ -3,6 +3,7 @@ package events
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/google/uuid"
 
@@ -10,7 +11,9 @@ import (
 )
 
 func ConnectNats() (*nats.Conn, error) {
-	nc, err := nats.Connect("nats://localhost:4222")
+
+	natsURL := os.Getenv("NATS_URL")
+	nc, err := nats.Connect(natsURL)
 
 	if err != nil {
 		return nil, err

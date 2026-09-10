@@ -25,8 +25,7 @@ func main() {
 	// Load .env
 	err := godotenv.Load()
 	if err != nil {
-		fmt.Println("Error loading .env")
-		return
+		fmt.Println("No .env file found, using environment variables")
 	}
 
 	// Connect to NATS
