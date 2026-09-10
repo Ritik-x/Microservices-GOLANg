@@ -2,16 +2,12 @@
 
 A small microservices-based backend system built using Go, PostgreSQL, NATS JetStream, JWT authentication, Docker, and Swagger.
 
-## Architecture
-
 
 ## Architecture
-
 
 ![Microservices Architecture](docs/architecture.png)
 
-
-### Communication
+## Communication
 
 The API Gateway communicates with the User Service using HTTP.
 
