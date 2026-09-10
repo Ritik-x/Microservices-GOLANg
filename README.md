@@ -4,31 +4,12 @@ A small microservices-based backend system built using Go, PostgreSQL, NATS JetS
 
 ## Architecture
 
-```text
-Client
-  |
-  | HTTP
-  v
-API Gateway (:8080)
-  |
-  | JWT Authentication
-  |
-  v
-User Service (:8081)
-  |
-  |----------------------> Neon PostgreSQL
-  |
-  | user.created event
-  v
-NATS JetStream
-  |
-  | Asynchronous message
-  v
-Notification Service (:8082)
-  |
-  v
-Neon PostgreSQL
-```
+
+## Architecture
+
+
+![Microservices Architecture](docs/architecture.png)
+
 
 ### Communication
 
