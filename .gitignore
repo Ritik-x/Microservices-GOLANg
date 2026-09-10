@@ -16,3 +16,5 @@ bin/
 # IDE
 .vscode/
 .idea/
+
+  gateway/go.sum

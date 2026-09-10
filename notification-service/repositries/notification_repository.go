@@ -24,7 +24,7 @@ func (repo *NotificationRepository) CreateNotification(
 ) error {
 	_, err := repo.DB.Exec(
 		ctx, `INSERT INTO notifications (event_id, user_id, message)
-		 VALUES ($1, $2)`,
+		 VALUES ($1, $2, $3)`,
 		eventID,
 		userID,
 		message,

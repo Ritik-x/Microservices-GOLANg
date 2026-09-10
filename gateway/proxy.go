@@ -26,3 +26,18 @@ func userServiceProxy() http.Handler {
 
 	return proxy
 }
+
+func authServiceProxy() http.Handler {
+	target, err := url.Parse("http://localhost:8081")
+	if err != nil {
+		panic(err)
+
+	}
+	proxy := httputil.NewSingleHostReverseProxy(target)
+	proxy.Director = func(req *http.Request) {
+		req.URL.Scheme = target.Scheme
+		req.URL.Host = target.Host
+		req.URL.Path = "/login"
+	}
+	return proxy
+}
