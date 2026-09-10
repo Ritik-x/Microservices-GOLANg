@@ -77,6 +77,7 @@ func main() {
 	// Routes
 	http.HandleFunc("/health", healthHandler)
 	http.HandleFunc("/users", userHandler.CreateUserHandler)
+	http.HandleFunc("/login", userHandler.LoginHandler)
 
 	fmt.Println("User Service running on port 8081")
 
