@@ -5,7 +5,7 @@ A small microservices-based backend system built using Go, PostgreSQL, NATS JetS
 
 ## Architecture
 
-![Microservices Architecture](docs/Architecture.png)
+<img src="docs/Architecture.png" alt="Microservices Architecture" width="700">
 
 ## Communication
 
